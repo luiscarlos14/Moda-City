@@ -26,7 +26,8 @@ margin-top: 5px;
 `;
 
 export const Body = styled.SafeAreaView`
-  flex: 1;
+  flex: 2;
+  margin-top: 20px;
 `;
 
 export const MainHeader = styled.SafeAreaView`
@@ -40,10 +41,14 @@ export const MainHeader = styled.SafeAreaView`
 export const HeaderBody = styled.Text`
   padding: 15px;
   font-size: 25px;
-  font-family: fantasy;
-
+  padding-bottom: 20px;
 `;
 
+export const Cards = styled.View `
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+`;
 
 
 export const Footer = styled.SafeAreaView`

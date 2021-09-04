@@ -5,6 +5,7 @@ import {
   Header,
   Body,
   HeaderBody,
+  HeaderBodyText,
   Footer,
   Button,
   Image,
@@ -13,13 +14,16 @@ import {
 } from "./styled";
 
 import banco from "../../../bdteste";
+import city from "../../../city";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Card from "../../../components/Card";
 import SelectCity from "../../../components/SelectCity";
-import { ScrollView, TouchableOpacity, Text } from "react-native";
+import { ScrollView, TouchableOpacity, Modal, Text } from "react-native";
 
 export default function Home({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(false);
+
   const bd = banco;
   return (
     <Container>
@@ -30,12 +34,22 @@ export default function Home({ navigation }) {
         <Image source={require("../../../assets/header.png")} />
       </Header>
       <MainHeader>
-        <SelectCity />
+        <SelectCity
+          options={city}
+          onChangeSelect={() => console.log(id)}
+          text="Selecione uma opção"
+        />
       </MainHeader>
 
       <Body>
         <ScrollView>
-          <HeaderBody>Últimos Lançamentos</HeaderBody>
+          <HeaderBody>
+            <HeaderBodyText>Últimos Lançamentos</HeaderBodyText>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+              <MaterialCommunityIcons name="filter" color="black" size={30} />
+            </TouchableOpacity>
+          </HeaderBody>
+
           <Cards>
             {bd
               .slice(0)
@@ -52,6 +66,14 @@ export default function Home({ navigation }) {
           </Cards>
         </ScrollView>
       </Body>
+
+      <Modal
+        animationType="slide"
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <TouchableOpacity onPress={() => setModalVisible(false)}><Text>Voltar</Text></TouchableOpacity>
+        </Modal>
     </Container>
   );
 }

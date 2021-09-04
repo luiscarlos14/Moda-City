@@ -38,7 +38,16 @@ export const MainHeader = styled.SafeAreaView`
   border-color: #636573;
 `;
 
-export const HeaderBody = styled.Text`
+export const HeaderBody = styled.View`
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ padding-left: 10px;
+ padding-right: 20px;
+`;
+
+
+export const HeaderBodyText = styled.Text`
   padding: 15px;
   font-size: 25px;
   padding-bottom: 20px;

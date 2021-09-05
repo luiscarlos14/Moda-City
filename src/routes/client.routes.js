@@ -6,7 +6,7 @@ const Drawer = createDrawerNavigator();
 
 import { HomeScreen } from "./stack.routes";
 
-import sidebar from "../components/sidebar";
+import sidebar from "../components/Sidebar";
 
 export default function Client() {
   return (

@@ -25,9 +25,9 @@ const SelectCity = ({ options, onChangeSelect, text }) => {
     <>
       <Selector onPress={() => setModalVisible(true)}>
         <TextSelector numberOfLines={1}>{txt}</TextSelector>
-
         <MaterialCommunityIcons name="chevron-down" color="black" size={50} />
       </Selector>
+      
       <Modal
         animationType="slide"
         visible={modalVisible}

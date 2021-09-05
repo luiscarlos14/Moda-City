@@ -11,6 +11,11 @@ import {
   Image,
   MainHeader,
   Cards,
+  ModalContainer,
+  ModalVoltar,
+  ModalVoltarText,
+  ModalHeader,
+  ModalTitle,
 } from "./styled";
 
 import banco from "../../../bdteste";
@@ -72,8 +77,20 @@ export default function Home({ navigation }) {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <TouchableOpacity onPress={() => setModalVisible(false)}><Text>Voltar</Text></TouchableOpacity>
-        </Modal>
+        <ModalContainer>
+          <ModalVoltar onPress={() => setModalVisible(false)}>
+            <MaterialCommunityIcons
+              name="chevron-down"
+              color="black"
+              size={50}
+            />
+            <ModalVoltarText>Voltar</ModalVoltarText>
+          </ModalVoltar>
+          <ModalHeader>
+            <ModalTitle>Categorias</ModalTitle>
+          </ModalHeader>
+        </ModalContainer>
+      </Modal>
     </Container>
   );
 }

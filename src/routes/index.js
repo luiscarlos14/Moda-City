@@ -1,10 +1,15 @@
-import React from 'react';
-import { View } from 'react-native';
+import React from "react";
 
-import Client from './client.routes';
+import Seller from "./seller.routes";
+import Client from "./client.routes";
+import Auth from "./auth.routes";
 
 export default function routes() {
- return (
-   <Client />
-  );
+  const authenticated = true;
+  return authenticated ? user() : <Auth />;
+}
+
+function user() {
+  const seller = false;
+  return seller ? <Seller /> : <Client />;
 }

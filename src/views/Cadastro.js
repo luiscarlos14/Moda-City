@@ -1,4 +1,5 @@
-import React, {useContext} from "react";
+import React, {useContext, useState, useEffect} from "react";
+
 import {
   View,
   Text,
@@ -8,11 +9,14 @@ import {
   StyleSheet,
   StatusBar,
   Alert,
-  Image
+  Image,
+  ScrollView,
+  Button,
 } from "react-native";
 import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
+import * as ImagePicker from 'expo-image-picker';
 
 import { useTheme } from "react-native-paper";
 
@@ -97,43 +101,57 @@ const SignInScreen = ({ navigation }) => {
     }
   };
 
-  /*  const loginHandle = (cpf, password) => {
+  const [admin, setAdmin] = useState(0);
+  const [seller, setSeller] = useState('');
+  const [name, setName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [image, setImage] = useState(null);
 
-        const foundUser = Users.filter( item => {
-            return cpf == item.cpf && password == item.password;
-        } );
-
-        if ( data.CPF.length == 0 || data.password.length == 0 ) {
-            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
-                {text: 'Okay'}
-            ]);
-            return;
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, we need camera roll permissions to make this work!');
         }
+      }
+    })();
+  }, []);
 
-        if ( foundUser.length == 0 ) {
-            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-                {text: 'Okay'}
-            ]);
-            return;
-        }
-        signIn(foundUser);
-    } */
 
-   
-        
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-    
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+
+    console.log(Image)
+  };
+
+
+
+
+
+
+
+      
 
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor="#050626" barStyle="light-content" />
-
-      <View style={styles.header}>
-        <Image
-          source={require("../assets/header.png")}
-          style={styles.image}
-        />
-      </View>
+      <ScrollView>
 
       <Animatable.View
         animation="fadeInUpBig"
@@ -152,10 +170,69 @@ const SignInScreen = ({ navigation }) => {
             },
           ]}
         >
+          Nome
+        </Text>
+        <View style={styles.action}>
+          <FontAwesome name="user" color={colors.text} size={20} />
+          <TextInput
+            placeholder="Informe o seu nome"
+            placeholderTextColor="#666666"
+            keyboardType="email-address"
+            style={[
+              styles.textInput,
+              {
+                color: colors.text,
+              },
+            ]}
+            autoCapitalize="none"
+            onChangeText={(val) => textInputChange(val)}
+            onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
+          />
+        </View>
+
+        <Text
+          style={[
+            styles.text_footer,
+            {
+              color: colors.text,
+              marginTop: 20,
+            },
+          ]}
+        >
+          Sobrenome
+        </Text>
+        <View style={styles.action}>
+          <FontAwesome name="user" color={colors.text} size={20} />
+          <TextInput
+            placeholder="Informe o seu sobrenome"
+            placeholderTextColor="#666666"
+            keyboardType="email-address"
+            style={[
+              styles.textInput,
+              {
+                color: colors.text,
+              },
+            ]}
+            autoCapitalize="none"
+            onChangeText={(val) => textInputChange(val)}
+            onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
+          />
+        </View>
+
+      
+      <Text
+          style={[
+            styles.text_footer,
+            {
+              color: colors.text,
+              marginTop: 20,
+            },
+          ]}
+        >
           Email
         </Text>
         <View style={styles.action}>
-          <FontAwesome name="id-card" color={colors.text} size={20} />
+          <FontAwesome name="envelope" color={colors.text} size={20} />
           <TextInput
             placeholder="Informe seu email"
             placeholderTextColor="#666666"
@@ -183,12 +260,78 @@ const SignInScreen = ({ navigation }) => {
           </Animatable.View>
         )}
 
+<Text
+          style={[
+            styles.text_footer,
+            {
+              color: colors.text,
+              marginTop: 20,
+            },
+          ]}
+        >
+          Cidade
+        </Text>
+        <View style={styles.action}>
+          <FontAwesome name="home" color={colors.text} size={20} />
+          <TextInput
+            placeholder="Informe seu email"
+            placeholderTextColor="#666666"
+            keyboardType="email-address"
+            style={[
+              styles.textInput,
+              {
+                color: colors.text,
+              },
+            ]}
+            autoCapitalize="none"
+            onChangeText={(val) => textInputChange(val)}
+            onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
+          />
+        </View>
         <Text
           style={[
             styles.text_footer,
             {
               color: colors.text,
-              marginTop: 35,
+              marginTop: 20,
+            },
+          ]}
+        >
+          Estado
+        </Text>
+        <View style={styles.action}>
+          <FontAwesome name="home" color={colors.text} size={20} />
+          <TextInput
+            placeholder="Informe seu email"
+            placeholderTextColor="#666666"
+            keyboardType="email-address"
+            style={[
+              styles.textInput,
+              {
+                color: colors.text,
+              },
+            ]}
+            autoCapitalize="none"
+            onChangeText={(val) => textInputChange(val)}
+            onEndEditing={(e) => textInputChange(e.nativeEvent.text)}
+          />
+        </View>
+
+        
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Button title="Selecione sua foto de Perfil" onPress={pickImage} />
+       </View>
+
+        
+
+        
+
+        <Text
+          style={[
+            styles.text_footer,
+            {
+              color: colors.text,
+              marginTop: 25,
             },
           ]}
         >
@@ -224,11 +367,6 @@ const SignInScreen = ({ navigation }) => {
             </Animatable.View>
             } 
 
-        <TouchableOpacity>
-          <Text style={{ color: "#050626", marginTop: 15 }}>
-            Esqueceu a Senha?
-          </Text>
-        </TouchableOpacity>
 
         <View style={styles.button}>
           <TouchableOpacity
@@ -240,7 +378,7 @@ const SignInScreen = ({ navigation }) => {
                 backgroundColor: "#050626",
                 borderColor: "#fff",
                 borderWidth: 1,
-                marginTop: 15,
+                marginTop: 5,
               },
             ]}
           >
@@ -252,18 +390,18 @@ const SignInScreen = ({ navigation }) => {
                 },
               ]}
             >
-              Entrar
+              Criar Conta
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => {}}
+            onPress={() => navigation.navigate("Login")}
             style={[
               styles.signIn,
               {
                 borderColor: "#050626",
                 borderWidth: 1,
-                marginTop: 15,
+                marginTop: 10,
               },
             ]}
           >
@@ -275,12 +413,13 @@ const SignInScreen = ({ navigation }) => {
                 },
               ]}
             >
-              Criar Conta
+              Login
             </Text>
           </TouchableOpacity>
         </View>
 
       </Animatable.View>
+      </ScrollView>
     </View>
   );
 };
@@ -291,6 +430,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#050626",
+    paddingTop: '5%'
   },
   header: {
     flex: 1,

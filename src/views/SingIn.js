@@ -233,7 +233,7 @@ const SignInScreen = ({ navigation }) => {
         <View style={styles.button}>
           <TouchableOpacity
             //onPress={() =>{loginHandle( data.username, data.password )} }
-               onPress={() => {console.log(data.email,data.password)}}
+               onPress={() => {Login(data.email,data.password)}}
             style={[
               styles.signIn,
               {

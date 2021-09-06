@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useState, useContext, useEffect } from "react";
 import api, { TOKEN_KEY } from "../config/api";
 
+
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -16,10 +17,10 @@ export const AuthProvider = ({ children }) => {
 
   const [authenticated, setAuthenticated] = useState();
 
-  const Login = (cpf, password) => {
+  const Login = (email, password) => {
     api
-      .post("/user/login", {
-        cpf: cpf,
+      .post("/login", {
+        email: email,
         password: password,
       })
       .then(function (response) {
@@ -31,13 +32,15 @@ export const AuthProvider = ({ children }) => {
       });
   };
 
+ 
+
   const Sair = () => {
     AsyncStorage.removeItem(TOKEN_KEY);
     setAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ Login, Sair, authenticated }}>
+    <AuthContext.Provider value={{ Login,  Sair, authenticated }}>
       {children}
     </AuthContext.Provider>
   );

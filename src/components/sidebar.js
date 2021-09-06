@@ -1,9 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import styled from "styled-components/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import ButtonSair from "./ButtonSair";
+import AuthContext from '../context/authentication';
 
 export default function sidebar({ navigation }) {
+  //const { Sair } = useContext(AuthContext);
+
   return (
     <Container>
       <Header>
@@ -31,9 +35,7 @@ export default function sidebar({ navigation }) {
         </ButtonNavigator>
       </Body>
       <Footer>
-        <ButtonFooter>
-          <ButtonFooterText>Sair</ButtonFooterText>
-        </ButtonFooter>
+        < ButtonSair />
       </Footer>
     </Container>
   );
@@ -102,21 +104,5 @@ const Footer = styled.View`
   justify-content: flex-end;
   align-items: center;
 `;
-export const ButtonFooter = styled.TouchableOpacity`
-  align-items: flex-end;
-  width: 90%;
-  height: 60px;
-  border-width: 1px;
-  border-color: #050626;
-  margin-bottom: 10px;
-  border-radius: 12px;
-  align-items: center;
-  justify-content: center;
-  margin: 10%;
-`;
 
-const ButtonFooterText = styled.Text`
-  color: #050626;
-  font-size: 25px;
-  font-weight: bold;
-`;
+

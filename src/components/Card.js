@@ -1,5 +1,9 @@
 import React from 'react';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import styled from "styled-components/native";
+import { SERVER, ID_PRODUCT } from '../config/api';
+import { Image } from 'react-native';
 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -12,11 +16,16 @@ const Card = (props) => {
         return `${title.substring(0, 24)}`}
     }
 
+    function red(){
+        AsyncStorage.removeItem(ID_PRODUCT);
+        props.redirect(props.id)
+    }
+
  return (
         <Main>
-            <TouchableOpacity onPress={props.onClick}>
+            <TouchableOpacity onPress={red}>
                  <Container>
-                        <Image source = {props.imagem}/>
+                        <Image style={{width:'100%', height: '100%'}} source={{ uri:  `${SERVER}/${props.photo}` }}/>
                 </Container>
                 <Body>
                     <Titulo>{props.title}</Titulo>
@@ -55,10 +64,7 @@ const Body = styled.SafeAreaView`
     margin-bottom: 2%;
 `;
 
-const Image = styled.Image`
-    width: 100%;
-    height: 100%;
-`;
+
 
 const Titulo = styled.Text`
     font-size: 20px;

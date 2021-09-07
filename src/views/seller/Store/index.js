@@ -1,7 +1,4 @@
-import React, { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import api, { ID_PRODUCT, TOKEN_KEY } from "../../../config/api";
-import AuthContext from "../../../context/authentication";
+import React, { useState } from "react";
 
 import {
   Container,
@@ -21,61 +18,18 @@ import {
   ModalTitle,
 } from "./styled";
 
+import banco from "../../../bdteste";
 import city from "../../../city";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Card from "../../../components/Card";
 import SelectCity from "../../../components/SelectCity";
-
 import { ScrollView, TouchableOpacity, Modal, Text } from "react-native";
 
 export default function Home({ navigation }) {
-
   const [modalVisible, setModalVisible] = useState(false);
-  const [list, setList] = useState([]);
 
-  const [token, setToken] = useState();
-
-  async function getProdutos() {
-    const res = (
-      await api.get(`/products`, {
-        headers: { Authorization: `token ${token}` },
-      })
-    ).data.response;
-    return res;
-  }
-
-  useEffect(() => {
-    AsyncStorage.getItem(TOKEN_KEY)
-      .then((value) => {
-        setToken(value);
-      })
-      .done();
-  }, []);
-
-  useEffect(() => {
-    getProdutos()
-      .then((result) => {
-        setList(result);
-      })
-      .catch();
-  }, [token]);
-
-
-  function RedirectDetails(id) {
-    produtoDetails(id);
-    console.log(id)
-  }
-
-  async function produtoDetails(i){
-    try {
-      await AsyncStorage.setItem(ID_PRODUCT, `${i}`);
-      navigation.navigate("Detalhes");
-    } catch (e) {
-      // saving error
-    }
-  } 
-
+  const bd = banco;
   return (
     <Container>
       <Header>
@@ -87,7 +41,7 @@ export default function Home({ navigation }) {
       <MainHeader>
         <SelectCity
           options={city}
-          onChangeSelect={() => console.log('id')}
+          onChangeSelect={() => console.log(id)}
           text="Selecione uma opção"
         />
       </MainHeader>
@@ -102,14 +56,16 @@ export default function Home({ navigation }) {
           </HeaderBody>
 
           <Cards>
-            {list.map((row, i) => (
+            {bd
+              .slice(0)
+              .reverse()
+              .map((row, i) => (
                 <Card
                   key={i}
-                  id={row.id}
-                  photo={row.photo}
-                  title={row.name}
-                  value={row.price}
-                  redirect={RedirectDetails}
+                  imagem={require("../../../assets/camisa1.jpg")}
+                  title={row.title}
+                  value={row.value}
+                  onClick={() => navigation.navigate("Detalhes")}
                 />
               ))}
           </Cards>

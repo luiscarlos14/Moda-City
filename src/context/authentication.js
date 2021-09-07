@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useState, useContext, useEffect } from "react";
-import api, { TOKEN_KEY } from "../config/api";
+import api, { TOKEN_KEY, LOGGED } from "../config/api";
 
 
 const AuthContext = createContext({});
@@ -8,7 +8,7 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
-    AsyncStorage.getItem(TOKEN_KEY)
+    AsyncStorage.getItem(LOGGED)
       .then((value) => {
         setAuthenticated(value === "true" ? true : false);
       })
@@ -16,6 +16,7 @@ export const AuthProvider = ({ children }) => {
   }, []); 
 
   const [authenticated, setAuthenticated] = useState();
+  const [token, setToken] = useState();
 
   const Login = (email, password) => {
     api
@@ -24,8 +25,10 @@ export const AuthProvider = ({ children }) => {
         password: password,
       })
       .then(function (response) {
-        AsyncStorage.setItem(TOKEN_KEY, "true");
+        AsyncStorage.setItem(LOGGED, "true");
+        AsyncStorage.setItem(TOKEN_KEY, response.data.token);
         setAuthenticated(true);
+        setToken(response.data.token);
       })
       .catch(function (error) {
         console.log(error);
@@ -40,7 +43,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ Login,  Sair, authenticated }}>
+    <AuthContext.Provider value={{ Login,  Sair, authenticated, token }}>
       {children}
     </AuthContext.Provider>
   );

@@ -16,18 +16,6 @@ export const Button = styled.TouchableOpacity`
   position: absolute;
   z-index: 2;
 `;
-
-export const ButtonAdd = styled.TouchableOpacity`
-    height: 50px;
-  flex: 1;
-  padding-left: 20px;
-  padding-right: 20px;
-  font-size: 18px;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 export const Image = styled.Image`
 flex: 1;
 z-index: 1;
@@ -65,7 +53,6 @@ export const Cards = styled.View `
 export const Footer = styled.SafeAreaView`
   flex: 1;
 `;
-
 
 //MODAL
 

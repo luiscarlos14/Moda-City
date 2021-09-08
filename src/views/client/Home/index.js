@@ -34,24 +34,23 @@ export default function Home({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   const [list, setList] = useState([]);
 
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(
+    AsyncStorage.getItem(TOKEN_KEY)
+      .then((value) => {
+        setToken(value);
+      })
+      .done()
+  );
 
   async function getProdutos() {
     const res = (
-      await api.get(`/products`, {
+      await api.get("/products", {
         headers: { Authorization: `token ${token}` },
       })
     ).data.response;
     return res;
   }
 
-  useEffect(() => {
-    AsyncStorage.getItem(TOKEN_KEY)
-      .then((value) => {
-        setToken(value);
-      })
-      .done();
-  }, []);
 
   useEffect(() => {
     getProdutos()
@@ -68,14 +67,29 @@ export default function Home({ navigation }) {
   }
 
   async function produtoDetails(i){
+    
     try {
       await AsyncStorage.setItem(ID_PRODUCT, `${i}`);
       navigation.navigate("Detalhes");
     } catch (e) {
-      // saving error
+      console.log(e);
     }
-  } 
+    console.log(useEffect(() =>{
+      console.log(
+    
+      AsyncStorage.getItem(ID_PRODUCT)
+      .then((value) => {
+        console.log(value);
+      })
+      .done()
+    )}))
 
+  }
+
+   
+
+
+  console.log(token)
   return (
     <Container>
       <Header>

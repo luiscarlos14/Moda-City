@@ -17,15 +17,20 @@ const Card = (props) => {
     }
 
     function red(){
-        AsyncStorage.removeItem(ID_PRODUCT);
+
+       // AsyncStorage.removeItem(ID_PRODUCT);
+
         props.redirect(props.id)
+
+
     }
 
  return (
         <Main>
             <TouchableOpacity onPress={red}>
                  <Container>
-                        <Image style={{width:'100%', height: '100%'}} source={{ uri:  `${SERVER}/${props.photo}` }}/>
+                 <Image style={{width:'100%', height: '100%'}} source={{ uri:  `${SERVER}/${props.photo}` }}/>
+
                 </Container>
                 <Body>
                     <Titulo>{props.title}</Titulo>

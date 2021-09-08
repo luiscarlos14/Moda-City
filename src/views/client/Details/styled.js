@@ -8,9 +8,36 @@ export const Header = styled.View`
   background-color: burlywood;
 `;
 
-export const HeaderImage = styled.Image``;
+export const HeaderImage = styled.Image`
+  width: auto;
+  height: 100%;
+`;
 
 export const Body = styled.View`
-  flex: 2;
+  flex: 1;
   background-color: brown;
+`;
+
+export const BodyTitle = styled.Text `
+font-size: 30px;
+padding: 20px;
+
+`;
+
+export const BodyTitleSecondary = styled.Text `
+font-size: 20px;
+padding-left: 10px;
+
+`;
+
+export const Size = styled.Text `
+font-size: 20px;
+padding-left: 10px;
+
+`;
+
+export const Price = styled.Text `
+font-size: 20px;
+padding-left: 10px;
+
 `;

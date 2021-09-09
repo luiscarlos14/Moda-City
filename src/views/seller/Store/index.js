@@ -98,7 +98,7 @@ export default function Home({ navigation }) {
   async function produtoDetails(i) {
     try {
       await AsyncStorage.setItem(ID_PRODUCT, `${i}`);
-      navigation.navigate("Detalhes");
+      navigation.navigate("Detalhes do Produto");
     } catch (e) {
       console.log(e);
     }

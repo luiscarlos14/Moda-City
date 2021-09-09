@@ -12,7 +12,7 @@ export default function routes() {
 }
 
 function user() {
-  const { seller } = useContext(AuthContext);
- //const seller = true;
+  //const { seller } = useContext(AuthContext);
+ const seller = true;
   return seller ? <Seller /> : <Client />;
 }

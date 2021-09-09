@@ -6,9 +6,13 @@ const Stack = createNativeStackNavigator();
 
 //Views Client
 import Home from "../views/client/Home";
-import Details from "../views/client/Details";
+import Details from "../views/client/Details/index";
+
+//Views Seller
+import DetailsAdm from "../views/seller/Details/index";
 import Store from '../views/seller/Store/index';
 import Form from "../views/seller/Form";
+import Editar from "../views/seller/FormEdit";
 
 
 
@@ -31,7 +35,7 @@ export { HomeScreen };
 
 
 
-//Views Seller
+
 
 
 
@@ -43,9 +47,15 @@ const HomeScreenAdmin = () => {
           component={Home}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="Detalhes do Produto" component={DetailsAdm} />
+
         <Stack.Screen name="Detalhes" component={Details} />
-        <Stack.Screen name="Store" component={Store}   options={{ headerShown: false }} />
+
+        <Stack.Screen name="Store" component={Store} options={{ headerShown: false }} />
+
         <Stack.Screen name="Novo Produto" component={Form} />
+        <Stack.Screen name="Editar Produto" component={Editar} />
+
 
 
 

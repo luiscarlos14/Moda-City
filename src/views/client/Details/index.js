@@ -89,13 +89,15 @@ export default function Details() {
   return (
    
     <Container>
+
       {list.map((row) => (
         <>
          
           <Header>
             <HeaderImage source={{ uri: `${SERVER}/${row.photo}` }} />
           </Header>
-          <ScrollView>
+
+          <ScrollView style={{flex: 1.25}}>
           <Body>
             <BodyTitle>{row.name}</BodyTitle>
             <BodyTitleSecondary>{row.description}</BodyTitleSecondary>
@@ -110,12 +112,14 @@ export default function Details() {
                       key={row.id}
                       source={{ uri: `${SERVER}/${row.photo}` }}
                     />
+
+                    <Text>{ `${row.firstName} ${row.lastName}`}</Text>
                   </>
                 ))}
               </Footer>
             </View>
+
           </Body>
-       
         </ScrollView>
         </>
       ))}

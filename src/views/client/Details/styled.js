@@ -9,11 +9,11 @@ export const Header = styled.View`
 
 export const HeaderImage = styled.Image`
   width: auto;
-  height: 110%;
+  height: 100%;
 `;
 
 export const Body = styled.View`
-  flex: 1;
+margin-top: 15px;
 `;
 
 export const BodyTitle = styled.Text `

@@ -7,6 +7,7 @@ const Stack = createNativeStackNavigator();
 //Views Client
 import Home from "../views/client/Home";
 import Details from "../views/client/Details/index";
+import Loja from '../views/client/Store/index';
 
 //Views Seller
 import DetailsAdm from "../views/seller/Details/index";
@@ -26,6 +27,8 @@ const HomeScreen = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen name="Detalhes" component={Details} />
+        <Stack.Screen name="Loja" component={Loja} />
+
       </Stack.Navigator>
   );
 };

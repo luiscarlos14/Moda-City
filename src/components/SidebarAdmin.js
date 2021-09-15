@@ -1,23 +1,23 @@
-import React, {useContext} from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import styled from "styled-components/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ButtonSair from "./ButtonSair";
-import AuthContext from '../context/authentication';
+import AuthContext from "../context/authentication";
+
+import Photo from "./HeaderSidebar";
 
 export default function sidebar({ navigation }) {
-  //const { Sair } = useContext(AuthContext);
 
   return (
     <Container>
+      
       <Header>
         <Button onPress={() => navigation.closeDrawer()}>
           <MaterialCommunityIcons name="close" color="black" size={50} />
+          
         </Button>
-        <Image>
-          <ImageHeader source={require("../assets/luis.jpeg")} />
-          <TextHeader>LUIS CARLOS BARROS</TextHeader>
-        </Image>
+        <Photo />
       </Header>
 
       <Body>
@@ -43,7 +43,7 @@ export default function sidebar({ navigation }) {
 
 const Container = styled.SafeAreaView`
   flex: 1;
-  background-color: #fff;
+  background-color: #636573;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -53,11 +53,11 @@ export const Button = styled.TouchableOpacity`
 `;
 
 const Header = styled.SafeAreaView`
+margin-top: 20px;
   justify-content: center;
   padding: 10px;
   z-index: 1;
   flex: 1;
-  background-color: brown;
 `;
 
 const Image = styled.View`
@@ -71,17 +71,11 @@ const ImageHeader = styled.Image`
   border-radius: 50px;
 `;
 
-const TextHeader = styled.Text`
-  padding-top: 4%;
-  font-size: 20px;
-  color: #000;
-`;
-
 const Body = styled.View`
   flex: 2;
   align-items: center;
-  background-color: blueviolet;
   padding: 2%;
+  justify-content: center;
 `;
 
 const ButtonNavigator = styled.TouchableOpacity`
@@ -100,9 +94,6 @@ const ButtonNavigatorText = styled.Text`
 
 const Footer = styled.View`
   flex: 1;
-  background-color: blue;
   justify-content: flex-end;
   align-items: center;
 `;
-
-

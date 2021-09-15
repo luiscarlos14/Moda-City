@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import api, { ID_PRODUCT, TOKEN_KEY } from "../../../config/api";
+import api, { ID_PRODUCT, TOKEN_KEY, ID_SELLER } from "../../../config/api";
 import AuthContext from "../../../context/authentication";
 
 import {
@@ -66,17 +66,17 @@ export default function Home({ navigation }) {
     console.log(id)
   }
 
-  async function produtoDetails(i){
+  async function produtoDetails(i,s){
     
     try {
       await AsyncStorage.setItem(ID_PRODUCT, `${i}`);
+      await AsyncStorage.setItem(ID_SELLER, `${s}`);
       navigation.navigate("Detalhes");
     } catch (e) {
       console.log(e);
     }
     console.log(useEffect(() =>{
       console.log(
-    
       AsyncStorage.getItem(ID_PRODUCT)
       .then((value) => {
         console.log(value);
@@ -86,10 +86,7 @@ export default function Home({ navigation }) {
 
   }
 
-   
 
-
-  console.log(token)
   return (
     <Container>
       <Header>

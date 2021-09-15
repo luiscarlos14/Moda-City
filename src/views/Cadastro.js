@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -9,18 +9,18 @@ import {
   Alert,
   Image,
   Button,
-  Platform
+  Platform,
+  ScrollView
 } from "react-native";
-import api, {TOKEN_KEY} from '../config/api'
+import api, { TOKEN_KEY } from "../config/api";
 import styled from "styled-components/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import * as ImagePicker from 'expo-image-picker';
-
-
+import * as ImagePicker from "expo-image-picker";
+import { RadioButton } from "react-native-paper";
 
 export default function Cadastro() {
   const [admin, setAdmin] = useState(0);
-  const [seller, setSeller] =useState(1);
+  const [seller, setSeller] = useState("0");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,6 +28,8 @@ export default function Cadastro() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
+
+  const [checked, setChecked] = React.useState("first");
 
   const [token, setToken] = useState(
     AsyncStorage.getItem(TOKEN_KEY)
@@ -39,13 +41,13 @@ export default function Cadastro() {
 
   const [image, setImage] = useState(null);
 
-
   useEffect(() => {
     (async () => {
-      if (Platform.OS !== 'web') {
-        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
+      if (Platform.OS !== "web") {
+        const { status } =
+          await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to make this work!");
         }
       }
     })();
@@ -60,10 +62,9 @@ export default function Cadastro() {
     });
 
     if (!result.cancelled) {
-      setImage(result.uri);    }
+      setImage(result.uri);
+    }
   };
-
-
 
   const register = () => {
     postUser(
@@ -71,22 +72,47 @@ export default function Cadastro() {
       seller,
       firstName,
       lastName,
-      email, 
+      email,
       password,
-      state, 
+      state,
       city,
       image,
       token
-    )
+    );
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
+ 
       <View style={styles.containerLogo}>
         <Image
           style={styles.logo}
           source={require("../assets/NewHeader.png")}
         ></Image>
+      </View>
+
+
+
+  
+      <View style={{flexDirection: 'row', marginBottom: 10}}>
+
+        <View style={{marginRight: 50, justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Cliente</Text>
+          <RadioButton
+            value="0"
+            status={seller === "0" ? "checked" : "unchecked"}
+            onPress={() => setSeller("0")}
+          />
+        </View>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Text>Vendedor</Text>
+          <RadioButton
+            value="1"
+            status={seller === "1" ? "checked" : "unchecked"}
+            onPress={() => setSeller("1")}
+          />
+        </View>
       </View>
 
       <View style={styles.names}>
@@ -137,31 +163,34 @@ export default function Cadastro() {
         />
       </View>
 
-      <View style={{alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Selecione foto de perfil" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
-    </View>
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <Button title="Selecione foto de perfil" onPress={pickImage} />
+        {image && (
+          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+        )}
+      </View>
 
       <TouchableOpacity style={styles.button} onPress={() => register()}>
         <Text style={{ color: "#fff" }}>CADASTRAR</Text>
       </TouchableOpacity>
-
+    
     </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#14152a",
+    //backgroundColor: "#14152a",
     backgroundColor: "#ffffff",
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
   },
 
   containerLogo: {
     width: "70%",
-    marginTop: "-15%",
+    // marginTop: "-15%",
     marginBottom: "10%",
     alignItems: "center",
     textAlign: "center",
@@ -204,6 +233,7 @@ const styles = StyleSheet.create({
   button: {
     width: "70%",
     marginTop: 15,
+    marginBottom: 15,
     height: 40,
     backgroundColor: "#14152a",
     borderRadius: 10,
@@ -218,31 +248,28 @@ async function postUser(
   seller,
   firstName,
   lastName,
-  email, 
+  email,
   password,
-  state, 
+  state,
   city,
   image,
   token
-)
-
-{
-
-  let typeImg = (image).slice(-3);
+) {
+  let typeImg = image.slice(-3);
   let user = new FormData();
- 
+
   user.append("admin", admin);
-  user.append("seller", seller);
+  user.append("seller", parseInt(seller));
   user.append("firstName", firstName);
   user.append("lastName", lastName);
   user.append("email", email);
   user.append("password", password);
   user.append("state", state);
   user.append("city", city);
-  user.append("photo",{
-    name:  `${firstName}${lastName}${city}.${typeImg}`,
-    type: 'image/'+ typeImg,
-    uri: image
+  user.append("photo", {
+    name: `${firstName}${lastName}${city}.${typeImg}`,
+    type: "image/" + typeImg,
+    uri: image,
   });
 
   const config = {
@@ -254,5 +281,5 @@ async function postUser(
 
   await api.post("/users", user, config).then(() => {
     alert("User add!");
-  });  
+  });
 }

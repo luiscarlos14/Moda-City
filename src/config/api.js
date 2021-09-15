@@ -14,3 +14,6 @@ export const SELLER = "@seller";
 export const ADMIN = "@admin";
 export const CITY = "@city";
 export const ID_USER = "@iduser";
+export const NAME_USER = "@nameuser";
+export const ID_SELLER = "@idseller";
+

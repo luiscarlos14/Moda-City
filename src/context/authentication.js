@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useState, useContext, useEffect } from "react";
-import api, { TOKEN_KEY, LOGGED, ADMIN, SELLER, CITY, ID_USER } from "../config/api";
+import api, { TOKEN_KEY, LOGGED, ADMIN, SELLER, CITY, ID_USER, NAME_USER } from "../config/api";
 
 const AuthContext = createContext({});
 
@@ -31,6 +31,7 @@ export const AuthProvider = ({ children }) => {
         AsyncStorage.setItem(TOKEN_KEY, response.data.token);
         AsyncStorage.setItem(ID_USER,`${response.data.data_user.id_user}`);
         AsyncStorage.setItem(CITY, response.data.data_user.city);
+        AsyncStorage.setItem(NAME_USER, response.data.data_user.name);
         setAuthenticated(true);
         setToken(response.data.token);
 
@@ -53,7 +54,10 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.removeItem(TOKEN_KEY);
     AsyncStorage.removeItem(ID_USER);
     AsyncStorage.removeItem(CITY);
-    setAuthenticated(false);        
+    AsyncStorage.removeItem(NAME_USER);
+    setAuthenticated(false);   
+    setSeller(false);   
+    setAdmin(false);       
     setToken('');
   };
 

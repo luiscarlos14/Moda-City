@@ -115,11 +115,13 @@ export default function Home({ navigation }) {
     );
   }
 
+  console.log(user)
+
   return (
     <Container>
       <Header>
         <Button onPress={() => navigation.openDrawer()}>
-          <MaterialCommunityIcons name="menu" color="white" size={50} />
+          <MaterialCommunityIcons name="menu" color="#636573"  size={50} />
         </Button>
         {user.map((row) => (
           <Image key={row.id} source={{ uri: `${SERVER}/${row.photo}` }} />

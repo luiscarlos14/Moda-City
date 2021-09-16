@@ -17,18 +17,7 @@ export default function sidebar({ navigation }) {
         <Photo />
       </Header>
       <Body>
-        <ButtonNavigator>
-          <ButtonNavigatorText>Home</ButtonNavigatorText>
-        </ButtonNavigator>
-        <ButtonNavigator>
-          <ButtonNavigatorText>Home</ButtonNavigatorText>
-        </ButtonNavigator>
-        <ButtonNavigator>
-          <ButtonNavigatorText>Home</ButtonNavigatorText>
-        </ButtonNavigator>
-        <ButtonNavigator>
-          <ButtonNavigatorText>Home</ButtonNavigatorText>
-        </ButtonNavigator>
+      
       </Body>
       <Footer>
         <ButtonSair />

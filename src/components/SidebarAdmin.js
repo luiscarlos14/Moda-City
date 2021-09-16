@@ -30,9 +30,7 @@ export default function sidebar({ navigation }) {
         <ButtonNavigator>
           <ButtonNavigatorText>Meus Produtos</ButtonNavigatorText>
         </ButtonNavigator>
-        <ButtonNavigator>
-          <ButtonNavigatorText>Home</ButtonNavigatorText>
-        </ButtonNavigator>
+
       </Body>
       <Footer>
         < ButtonSair />

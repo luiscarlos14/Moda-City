@@ -44,6 +44,9 @@ export const MainHeader = styled.SafeAreaView`
   height: 10%;
   border-bottom-width: 3px;
   border-color: #636573;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 `;
 export const HeaderBody = styled.View`
  flex-direction: row;

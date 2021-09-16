@@ -5,6 +5,7 @@ import api, {
   TOKEN_KEY,
   ID_USER,
   SERVER,
+  ID_SELLER_CLIENT
 } from "../../../config/api";
 import AuthContext from "../../../context/authentication";
 
@@ -41,7 +42,7 @@ export default function Home({ navigation }) {
   const [user, setUser] = useState([]);
 
   const [userID, setUserID] = useState(
-    AsyncStorage.getItem(ID_USER)
+    AsyncStorage.getItem(ID_SELLER_CLIENT)
       .then((value) => {
         setUserID(value);
       })
@@ -91,14 +92,14 @@ export default function Home({ navigation }) {
   }, [token]);
 
   function RedirectDetails(id) {
-    produtoDetails(id);
-    console.log(id);
+    //produtoDetails(id);
   }
-
+/* 
   async function produtoDetails(i) {
     try {
+      await AsyncStorage.removeItem(ID_PRODUCT);
       await AsyncStorage.setItem(ID_PRODUCT, `${i}`);
-      navigation.navigate("Detalhes do Produto");
+      navigation.navigate("Detalhes");
     } catch (e) {
       console.log(e);
     }
@@ -113,7 +114,7 @@ export default function Home({ navigation }) {
         );
       })
     );
-  }
+  } */
 
   console.log(user)
 
@@ -128,10 +129,15 @@ export default function Home({ navigation }) {
         ))}
       </Header>
       <MainHeader>
-        <ButtonAdd onPress={() => navigation.navigate("Novo Produto")}>
-          <Text style={{color: 'black', fontSize: 25}}>Novo Produto</Text>
-          <MaterialCommunityIcons name="plus" color="black" size={50} />
-        </ButtonAdd>
+<TouchableOpacity>
+   <MaterialCommunityIcons name="plus" color="black" size={50} />
+   </TouchableOpacity> 
+   <TouchableOpacity>
+   <MaterialCommunityIcons name="plus" color="black" size={50} />
+   </TouchableOpacity>
+   <TouchableOpacity>
+   <MaterialCommunityIcons name="plus" color="black" size={50} />
+   </TouchableOpacity>
       </MainHeader>
 
       <Body>

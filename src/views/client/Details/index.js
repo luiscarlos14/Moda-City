@@ -5,6 +5,7 @@ import api, {
   TOKEN_KEY,
   SERVER,
   ID_SELLER,
+  ID_SELLER_CLIENT
 } from "../../../config/api";
 import {
   Container,
@@ -22,7 +23,7 @@ import {
 
 import { ScrollView, Text, View } from "react-native";
 
-export default function Details() {
+export default function Details({ navigation }) {
   const [produto, setProduto] = useState(
     AsyncStorage.getItem(ID_PRODUCT)
       .then((value) => {
@@ -38,6 +39,17 @@ export default function Details() {
       })
       .done()
   );
+
+  async function setSellerId(i){
+try {
+  await AsyncStorage.setItem(ID_SELLER_CLIENT, `${i}`);
+  navigation.navigate("Loja")
+  
+} catch (error) {
+  console.log(error)
+}
+  
+  }
 
   const [list, setList] = useState([]);
 
@@ -84,8 +96,6 @@ export default function Details() {
       .catch();
   }, [token, seller]);
 
-  console.log(user);
-
   return (
    
     <Container>
@@ -105,19 +115,23 @@ export default function Details() {
             <Price>{`Valor: R$ ${row.price}`}</Price>
 
             <View style={{ justifyContent: "center", alignItems: "center" }}>
-              <Footer>
+
+              
                 {user.map((row) => (
-                  <>
+                  <Footer onPress={() => setSellerId(row.id)}>
                     <ImageFooter
                       key={row.id}
                       source={{ uri: `${SERVER}/${row.photo}` }}
                     />
 
                     <Text>{ `${row.firstName} ${row.lastName}`}</Text>
-                  </>
+                    </Footer>
                 ))}
-              </Footer>
+             
+
             </View>
+
+        
 
           </Body>
         </ScrollView>

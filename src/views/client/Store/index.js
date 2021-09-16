@@ -116,8 +116,6 @@ export default function Home({ navigation }) {
     );
   } */
 
-  console.log(user)
-
   return (
     <Container>
       <Header>
@@ -151,6 +149,9 @@ export default function Home({ navigation }) {
 
           <Cards>
             {list.map((row, i) => (
+
+              row.user == userID ?
+              
               <Card
                 key={i}
                 id={row.id}
@@ -158,7 +159,8 @@ export default function Home({ navigation }) {
                 title={row.name}
                 value={row.price}
                 redirect={RedirectDetails}
-              />
+              /> : <></>
+
             ))}
           </Cards>
         </ScrollView>

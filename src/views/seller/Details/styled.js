@@ -51,3 +51,11 @@ export const Button = styled.TouchableOpacity`
   position: absolute;
   z-index: 2;
 `;
+
+export const ButtonTwo = styled.TouchableOpacity`
+  padding-top: 80px;
+  padding-left: 88%;
+
+  position: absolute;
+  z-index: 2;
+`;

@@ -40,6 +40,7 @@ export const AuthProvider = ({ children }) => {
           setAdmin(true);
         }
         else if (response.data.data_user.seller === 1) {
+          AsyncStorage.setItem(SELLER, '1');
           setSeller(true);
         }
         
@@ -55,6 +56,7 @@ export const AuthProvider = ({ children }) => {
     AsyncStorage.removeItem(ID_USER);
     AsyncStorage.removeItem(CITY);
     AsyncStorage.removeItem(NAME_USER);
+    AsyncStorage.removeItem(SELLER);
     setAuthenticated(false);   
     setSeller(false);   
     setAdmin(false);       

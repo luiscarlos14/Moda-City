@@ -9,6 +9,7 @@ export default axios.create({
 
 export const TOKEN_KEY = "@modadacidade";
 export const ID_PRODUCT ="@idproduto";
+export const ID_PRODUCT_EDIT ="@idproduto";
 export const LOGGED = "@logged";
 export const SERVER = "http://192.168.1.17:3001";
 //export const SERVER = "http://10.0.0.104:3001/";

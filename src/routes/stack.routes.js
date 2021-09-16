@@ -14,6 +14,7 @@ import DetailsAdm from "../views/seller/Details/index";
 import Store from '../views/seller/Store/index';
 import Form from "../views/seller/Form";
 import Editar from "../views/seller/FormEdit";
+import EditarImage from "../views/seller/FormEditImage";
 
 
 
@@ -58,6 +59,8 @@ const HomeScreenAdmin = () => {
 
         <Stack.Screen name="Novo Produto" component={Form} />
         <Stack.Screen name="Editar Produto" component={Editar} />
+        <Stack.Screen name="Editar Foto" component={EditarImage} />
+
 
 
 
